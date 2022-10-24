@@ -10,3 +10,4 @@ def test_shape_integrity():
     assert np.array_equal(T.L,np.array([[1,0],[1,0],[1,1]])) == True
     assert np.array_equal(T.S,np.array([[0,1,1],[1,1,0]])) == True
     assert np.array_equal(T.Z,np.array([[1,1,0],[0,1,1]])) == True
+
