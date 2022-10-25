@@ -1,7 +1,12 @@
 # Shape generation package
 from ast import List
+from collections import defaultdict
+from email.policy import default
+from secrets import token_bytes
 from typing import Tuple
 import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib import colors
 
 
 
@@ -51,8 +56,30 @@ class Shape:
             cache = GRID.copy()
             for a,b in pos:
                 cache[row + a][col + b] = 1
-            print(f"GRID:\n{cache}")
-            
+            self.plotState(shape,cache)
+
+    def shapeColorMap(self,shape) -> str:
+
+        colorMap = {
+            self.O.tobytes() : '#f2ef21',
+            self.I.tobytes() : '#21f2f2',
+            self.T.tobytes() : '#f221ec',
+            self.J.tobytes() : '#212ef2',
+            self.L.tobytes() : '#f29321',
+            self.S.tobytes() : '#64f221',
+            self.Z.tobytes() : '#f23a21',
+        }
+        return colorMap[shape.tobytes()]
+    
+    def plotState(self,shape,GRID):
+        row,col = GRID.shape
+        cmap = colors.ListedColormap(['#fcf9f9',self.shapeColorMap(shape)]) # blue -> 0 red -> 1 black -> already present.
+        plt.figure(figsize=(col,row)) #non-classic division.
+        plt.pcolor(GRID,cmap=cmap,edgecolors='k', linewidths=1)
+        plt.show(block = False)
+        plt.pause(1)
+        plt.close()
+        
 
 
 
