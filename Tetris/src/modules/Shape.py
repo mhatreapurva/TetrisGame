@@ -5,8 +5,7 @@ from email.policy import default
 from secrets import token_bytes
 from typing import Tuple
 import numpy as np
-import matplotlib.pyplot as plt
-from matplotlib import colors
+
 
 
 
@@ -21,12 +20,17 @@ https://en.wikipedia.org/wiki/Tetromino
 class Shape:
     def __init__(self):
         self.O = np.array([[1,1],[1,1]]) # --> Tested
-        self.I = np.array([[1,1,1,1]]) # --> Tested
-        self.T = np.array([[1,1,1],[0,1,0]]) # --> Tested
-        self.J = np.array([[0,1],[0,1],[1,1]]) # --> Tested
-        self.L = np.array([[1,0],[1,0],[1,1]]) # --> Tested
-        self.S = np.array([[0,1,1],[1,1,0]]) # --> Tested
-        self.Z = np.array([[1,1,0],[0,1,1]])
+        self.I = np.array([[2,2,2,2]]) # --> Tested
+        self.T = np.array([[3,3,3],[0,3,0]]) # --> Tested
+        #self.T = np.array([[0,3,0],[3,3,3]]) # --> Tested
+        self.J = np.array([[0,4],[0,4],[4,4]]) # --> Tested
+        #self.J = np.array([[4,4],[0,4],[0,4]])
+        self.L = np.array([[5,0],[5,0],[5,5]]) # --> Tested
+        #self.L = np.array([[5,5],[5,0],[5,0]]) # --> Tested
+        self.S = np.array([[0,6,6],[6,6,0]]) # --> Tested
+        #self.S = np.array([[6,6,0],[0,6,6]])
+        self.Z = np.array([[7,7,0],[0,7,7]])
+        #self.Z = np.array([[0,7,7],[7,7,0]])
 
 
     def shapeDetails(self, currShape) -> None:
@@ -57,28 +61,50 @@ class Shape:
             for a,b in pos:
                 cache[row + a][col + b] = 1
             self.plotState(shape,cache)
+    
+    def validGridStates(self,shape,GRID):
+        res = []
+        print(GRID)
+        ROW, COL = GRID.shape
+        a,b = np.nonzero(shape)
+        pos = np.array(list(zip(a,b)))
+        valid = self.validPositions(shape,GRID)
+        for row, col in valid: # Assume only valid actions are returned.
+            cache = GRID.copy() #deep copy
+            for a,b in pos:
+                cache[row + a][col + b] = np.amax(shape)
+            res.append(cache)
+        return np.array(res)
+        
 
-    def shapeColorMap(self,shape) -> str:
+    def shapeColorMap(self,maxNum) -> str:
 
         colorMap = {
-            self.O.tobytes() : '#f2ef21',
-            self.I.tobytes() : '#21f2f2',
-            self.T.tobytes() : '#f221ec',
-            self.J.tobytes() : '#212ef2',
-            self.L.tobytes() : '#f29321',
-            self.S.tobytes() : '#64f221',
-            self.Z.tobytes() : '#f23a21',
-        }
-        return colorMap[shape.tobytes()]
+            1 : '#f2ef21',
+            2 : '#21f2f2',
+            3 : '#f221ec',
+            4 : '#212ef2',
+            5 : '#f29321',
+            6 : '#64f221',
+            7 : '#f23a21',
+        } #redundant
+        return colorMap[maxNum]
     
-    def plotState(self,shape,GRID):
-        row,col = GRID.shape
-        cmap = colors.ListedColormap(['#fcf9f9',self.shapeColorMap(shape)]) # blue -> 0 red -> 1 black -> already present.
+    def plotState(self,GRID):
+        if type(GRID) == None: return
+        import matplotlib.pyplot as plt
+        from matplotlib import colors
+        currGRID = GRID.copy()
+        currGRID = np.flipud(currGRID) 
+        row,col = currGRID.shape
+        #cmap = colors.ListedColormap(['#fcf9f9',self.shapeColorMap(shape)]) # blue -> 0 red -> 1 black -> already present.
+        cmap = colors.ListedColormap(['#fcf9f9','#f2ef21','#21f2f2','#f221ec','#212ef2','#f29321','#64f221','#f23a21']) 
         plt.figure(figsize=(col,row)) #non-classic division.
-        plt.pcolor(GRID,cmap=cmap,edgecolors='k', linewidths=1)
-        plt.show(block = False)
-        plt.pause(1)
-        plt.close()
+        plt.pcolor(currGRID,cmap=cmap,edgecolors='k', linewidths=2,vmin=0,vmax=7)
+        #plt.show(block = False)
+        #plt.pause(2)
+        #plt.close()
+        plt.show()
         
 
 
