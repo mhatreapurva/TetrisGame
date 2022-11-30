@@ -4,6 +4,7 @@ from typing import Tuple
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib import colors
+from modules.expectimax import Expectimax
 
 
 
@@ -72,6 +73,7 @@ class Shape:
             for a,b in pos:
                 cache[row + a][col + b] = shape[a,b]
             print(f"Valid move: {ctx}\n")
+            print(f"State score: {Expectimax.score(self,state = cache)}") #Each grid is a state.
             self.plotState(shape,cache)
             print(f"\n")
             ctx += 1
@@ -96,7 +98,6 @@ class Shape:
         plt.figure(figsize=(col,row)) 
         plt.pcolor(np.flip(GRID),cmap = cmap,edgecolors='black', linewidths=1)
         plt.show()
-        
         plt.close()
         
     
