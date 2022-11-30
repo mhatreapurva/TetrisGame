@@ -1,6 +1,6 @@
 import numpy as np
 import random
-from .shapes import Shape
+from modules import shape
 
 # Pass state into expectimax and it should be able to return the best moves for all the shapes.
 
@@ -26,9 +26,9 @@ class Expectimax:
         return None
     
     def randomShapeGenerator():
-        generateShape = Shape()
+        generateShape = shape.Shape()
         shapes = [generateShape.O,generateShape.I]
-        return random.choice(shapes)
+        return np.random.choice(shapes,1,p=[0.5,0.5])[0]
 
 
 
