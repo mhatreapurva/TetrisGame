@@ -60,7 +60,7 @@ def baseAI(tetris):
 if __name__ == "__main__":
 
     """
-    Replace self.shapeProb in shape.py with the below, this is what we used!
+    Replace self.shapeProb in modules/shape.py with the below, this is what we used!
 
     self.shapeProb = {
         self.O.tobytes() : 0.,
