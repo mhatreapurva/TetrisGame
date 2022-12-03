@@ -6,7 +6,10 @@ from modules import sysvariables
 
 import numpy as np
 
-tetris = grid.Grid(10,10)
+import warnings
+warnings.filterwarnings("ignore", category=np.VisibleDeprecationWarning) 
+
+tetris = grid.Grid(5,5)
 
 #tetris.grid = np.array([[0., 0., 0., 0., 0.],[0., 0., 0., 0., 0.],[0., 0., 0., 0., 0.],[0., 0., 0., 0., 0.]]) #Overriding to provide randomness.
 
@@ -55,14 +58,15 @@ shape = shape.Shape()
 
 # print(shape.validPositions(shape = shape.O,GRID = np.array([[0,0,0,1,1],[0,0,0,1,1]])))
 
-print("Playing the game.....")
+print("Playing the game.....\n")
+print(f"Initial Grid:\n {tetris.grid} ")
 playable = True
 
 argmax = (0,0)
 while(playable):
     actualShape = expectimax.randomShapeGenerator()
     moves = [] #reset moves
-    moves = expectimax.expectimax(2,tetris,actualShape)
+    moves = expectimax.expectimax(1,tetris,actualShape)
     if not len(moves):
         playable = False
         break
@@ -74,7 +78,10 @@ while(playable):
     chosenMove,_ = moves[argmax[0]]
     tetris = chosenMove
     tetris.grid[tetris.grid == 2] = 1
+    print(f"Incoming shape:\n {actualShape}")
+    print(f"New state after playing move: \n")
     print(tetris.grid)
-    shape.plotState(shape = None, GRID = tetris.grid)
+    print("\n")
+    #shape.plotState(shape = None, GRID = tetris.grid)
 
 print(shape.shapearr)

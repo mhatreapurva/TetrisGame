@@ -24,7 +24,14 @@ class Shape:
         self.L = np.array([[1,0],[1,0],[2,2]]) # --> Tested
         self.S = np.array([[0,1,2],[2,2,0]]) # --> Tested
         self.Z = np.array([[2,1,0],[0,2,2]])
-        self.shapearr = [self.O,self.I,self.T,self.J, self.L, self.S, self.Z]    
+        self.shapearr = [self.O,self.I,self.T,self.J]
+
+        self.shapeProb = {
+            self.O.tobytes() : 0.3,
+            self.I.tobytes() : 0.2,
+            self.T.tobytes() : 0.1,
+            self.J.tobytes() : 0.4,
+        }    
 
     def validPositions(self, shape, GRID): #No of children's
         # returns set of positions where the block can be fixed
@@ -78,3 +85,15 @@ class Shape:
         plt.pcolor(np.fliplr(np.flip(GRID)),cmap = cmap,edgecolors='black', linewidths=1)
         plt.show()
         plt.close()
+    
+    def playerMove(self,shape,GRID,valid):
+        ROW, COL = GRID.shape
+        a,b = np.nonzero(shape)
+        pos = np.array(list(zip(a,b)))
+        for row, col in valid:
+            cache = GRID.copy()
+            for a,b in pos:
+                cache[row + a][col + b] = 1
+            #self.plotState(shape,cache)
+            print(f"\n")
+        return cache #Return the updated grid position.

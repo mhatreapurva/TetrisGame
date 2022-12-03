@@ -14,6 +14,18 @@ we also need a scoring function
 """
 
 
+def baseAI(state):
+    if state is None: return -1
+    R,C = state.shape
+    r,c = [],[]
+    r,c = np.nonzero(state)
+    score = 0
+    score = r
+    if len(r):
+        score = min(r) #Keep the blocks as low as possible
+    else:
+        score = r
+    return score
 
 def score(state): #Computing the heuristic for each state.
     if state is None: return -1
@@ -22,27 +34,36 @@ def score(state): #Computing the heuristic for each state.
     r,c = np.nonzero(state)
     score = 0
     #score = r
-    if len(r):
-        score = min(r) #Keep the blocks as low as possible
-    else:
-        score = r
+    # if len(r):
+    #     score = min(r) #Keep the blocks as low as possible
+    # else:
+    #     score = r
     
     #print(f"State: {state}")
-
-    # for currShape in [t.O,t.I]:
-    #     #print(currShape)
-    #     #print(f"ho kya raha hai?:{t.validPositions(shape = currShape,GRID = state)}")
+    # t = s.Shape()
+    # for currShape in t.shapearr:
     #     score += len(t.validPositions(shape = currShape,GRID = state))
-    # #print(f"score: {score}")
-    #print("\n\n")
-    return score
+    # return score
+
+    #Compute aggregate height.
+    height = {}
+    tot = 0
+    #print(state)
+    #print(r,c)
+    if len(c):
+        for idx in range(len(c)):
+            if idx not in height:
+                height[idx] = R - r[idx]
+                tot += height[idx]
+    return -0.5 * tot # penalize for more aggregate height!.
+
 
 
 def randomShapeGenerator():
     generateShape = s.Shape()
     #shapes = [generateShape.O,generateShape.I]
     #return np.random.choice(shapes,1,p=[0.5,0.5])[0]
-    return np.random.choice(generateShape.shapearr,1)[0]
+    return np.random.choice(generateShape.shapearr,1,p=[0.3,0.2,0.1,0.4])[0]
 
 def generateChildren(shape,state):
     ROW, COL = state.shape
@@ -60,7 +81,7 @@ def generateChildren(shape,state):
         currGrid.grid = cache
         children.append((currGrid,shape))
     
-    return children 
+    return children, len(valid) 
 
 def helper(grid,shape): #helper to generate children.
     if grid is None: return
@@ -72,7 +93,7 @@ def expectimax(depth,grid,shape):
     if depth == 0:
         grid.score += score(grid.grid)
         return
-    children = (helper(grid,shape))
+    children, sco = (generateChildren(shape = shape,state = grid.grid))
     grid.children.extend(children)
     grid.score += score(grid.grid)
     #print(f"depth: {depth}") 
@@ -84,22 +105,27 @@ def expectimax(depth,grid,shape):
             sysvariables.NODES += 1
     
     #Bottom up.
-    
     if grid.maxP: #MaxPlayer
         maxScore = grid.score
         for g,_ in grid.children:
             maxScore = max(g.score,maxScore)
         grid.score = maxScore
 
-    elif not grid.maxP: #Chance player
+    elif not grid.maxP: #Chance player (M + C)
         N = len(grid.children)
         tot = 0
+        shapeDict = {}
         if N:
-            for g,_ in grid.children:
-                tot += g.score
-            grid.score = tot / N
-
-
+            for g,shape in grid.children:
+                if shape.tobytes() not in shapeDict:
+                    shapeDict[shape.tobytes()] = g.score
+                else:
+                    shapeDict[shape.tobytes()] = max(g.score, shapeDict[shape.tobytes()])
+            t = s.Shape()
+            for k,v in shapeDict.items():
+                tot += shapeDict[k] * t.shapeProb[k] #Score based on probabilities.
+            grid.score = tot
+        else: grid.score = 0
     return children
 
 
