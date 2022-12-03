@@ -63,7 +63,11 @@ def randomShapeGenerator():
     generateShape = s.Shape()
     #shapes = [generateShape.O,generateShape.I]
     #return np.random.choice(shapes,1,p=[0.5,0.5])[0]
-    return np.random.choice(generateShape.shapearr,1,p=[0.3,0.2,0.1,0.4])[0]
+    prob = []
+    for k,v in generateShape.shapeProb.items():
+        prob.append(v)
+
+    return np.random.choice(generateShape.shapearr,1,p=prob)[0]
 
 def generateChildren(shape,state):
     ROW, COL = state.shape

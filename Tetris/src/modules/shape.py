@@ -24,14 +24,14 @@ class Shape:
         self.L = np.array([[1,0],[1,0],[2,2]]) # --> Tested
         self.S = np.array([[0,1,2],[2,2,0]]) # --> Tested
         self.Z = np.array([[2,1,0],[0,2,2]])
-        self.shapearr = [self.O,self.I,self.T,self.J]
+        self.shapearr = np.array([self.O,self.I,self.T,self.J],dtype=object)
 
         self.shapeProb = {
-            self.O.tobytes() : 0.3,
-            self.I.tobytes() : 0.2,
-            self.T.tobytes() : 0.1,
-            self.J.tobytes() : 0.4,
-        }    
+            self.O.tobytes() : 0.,
+            self.I.tobytes() : 0.,
+            self.T.tobytes() : 0.5,
+            self.J.tobytes() : 0.5,
+        }   
 
     def validPositions(self, shape, GRID): #No of children's
         # returns set of positions where the block can be fixed
