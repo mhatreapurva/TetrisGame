@@ -1,10 +1,10 @@
-from modules import node
-from modules import shape
-from modules import grid
+import sys
+sys.path.append("..")
 from modules import expectimax
+from modules import shape
 from modules import sysvariables
+from modules import grid
 import matplotlib.pyplot as plt
-
 import numpy as np
 
 
