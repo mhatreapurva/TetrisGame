@@ -1,8 +1,9 @@
-from modules import node
-from modules import shape
-from modules import grid
+import sys
+sys.path.append("..")
 from modules import expectimax
+from modules import shape
 from modules import sysvariables
+from modules import grid
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -59,19 +60,17 @@ def baseAI(tetris):
 if __name__ == "__main__":
 
     """
-    Replace self.shapeProb in shape.py with the below, this is what we used!
-
+    Replace self.shapeProb in modules/shape.py with the below, this is what we used!
     self.shapeProb = {
             self.O.tobytes() : 0.25,
             self.I.tobytes() : 0.25,
-            self.T.tobytes() : 0.15,
-            self.J.tobytes() : 0.35,
-        }  
-    
+            self.T.tobytes() : 0.25,
+            self.J.tobytes() : 0.25,
+        } 
     
     """
     
-    print("********* Experiment 2 * 6 x 6 grid  * depth = 3 **********")
+    print("********* Experiment 1 * 8 x 8 grid * All shapes have same probabilities * depth = 2 **********")
     scoreKeeper = 0
     TOTAL = 100
     expectiAIScores = []
@@ -83,8 +82,8 @@ if __name__ == "__main__":
     for i in range(TOTAL):
         sysvariables.NODES = 0 #Reset node counter
         print(f"Simulation number expectimax AI: {i}")
-        tetris = grid.Grid(6,6)
-        curr = expectiAI(tetris = tetris,depth = depth)
+        tetris = grid.Grid(8,8)
+        curr = expectiAI(tetris = tetris,depth = 2)
         expectiAIScores.append(curr)
         ExpectiAINodes.append(sysvariables.NODES)
         scoreKeeper += curr
@@ -99,7 +98,7 @@ if __name__ == "__main__":
     TOTAL = 100
     for i in range(TOTAL):
         print(f"Simulation number baseline AI: {i}")
-        tetris = grid.Grid(6,6)
+        tetris = grid.Grid(8,8)
         curr, nodes = baseAI(tetris)
         baseAINodes.append(nodes)
         baseAIScores.append(curr)
@@ -113,28 +112,31 @@ if __name__ == "__main__":
     print(f"********* ExpectiAI Nodes avg: {sum(ExpectiAINodes)/len(ExpectiAINodes)} BaseAI Nodes avg: {sum(baseAINodes)/len(baseAINodes)} *********")
     print("\n\n\n\n")
 
+    
+
     x = expectiAIScores
-    plt.title("Expectimax Scores Experiment 2")
+    plt.title("Expectimax Scores Experiment 1")
     plt.style.use('ggplot')
     plt.hist(x, bins=15)
     plt.show()
 
     x = baseAIScores
 
-    plt.title("Baseline AI Scores Experiment 2")
+    plt.title("Baseline AI Scores Experiment 1")
     plt.style.use('ggplot')
     plt.hist(x, bins=15)
     plt.show()
 
     x = ExpectiAINodes
-    plt.title("Expectimax Nodes Experiment 2")
+    plt.title("Expectimax Nodes Experiment 1")
     plt.style.use('ggplot')
     plt.hist(x, bins=15)
     plt.show()
 
     x = baseAINodes
 
-    plt.title("Baseline AI Nodes Experiment 2")
+    plt.title("Baseline AI Nodes Experiment 1")
     plt.style.use('ggplot')
     plt.hist(x, bins=15)
     plt.show()
+

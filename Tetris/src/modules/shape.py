@@ -27,10 +27,10 @@ class Shape:
         self.shapearr = np.array([self.O,self.I,self.T,self.J],dtype=object)
 
         self.shapeProb = {
-            self.O.tobytes() : 0.,
-            self.I.tobytes() : 0.,
-            self.T.tobytes() : 0.5,
-            self.J.tobytes() : 0.5,
+            self.O.tobytes() : 0.25,
+            self.I.tobytes() : 0.25,
+            self.T.tobytes() : 0.25,
+            self.J.tobytes() : 0.25,
         }   
 
     def validPositions(self, shape, GRID): #No of children's
