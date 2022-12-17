@@ -1,8 +1,11 @@
-from modules import grid
+import sys
+sys.path.append("..")
+from modules import expectimax
 from modules import shape
-from modules import expectimax #contains random shape generator. P.S.: all shapes have equal probability.
-
-
+from modules import sysvariables
+from modules import grid
+import matplotlib.pyplot as plt
+import numpy as np
 
 
 def human(tetris):

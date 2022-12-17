@@ -3,11 +3,9 @@ from modules import shape
 from modules import grid
 from modules import expectimax
 from modules import sysvariables
-import human
-import baseline_ai
-import expecti_ai
+from AI import human,baseline_ai,expecti_ai
 
-problem_size = [(5,5),(6,6),(7,7),(8,8),(9,9)]
+problem_size = [(5,5),(6,6),(7,7),(8,8),(9,9),(20,20)]
 
 print("Choose a problem size")
 for i,pb in enumerate(problem_size):

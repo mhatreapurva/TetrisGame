@@ -12,23 +12,31 @@ import numpy as np
 def expectiAI(tetris,depth):
     SCORE = 0
     playable = True
-    argBig = tuple((0,0))
+    
+    s = shape.Shape() #Initialize shape object.
     while(playable):
         actualShape = expectimax.randomShapeGenerator()
+        #print(f"Incoming shape:\n {actualShape}")
+        #input("Press Enter to continue...")
         moves = [] #reset moves
-        moves = expectimax.expectimax(depth = depth,grid = tetris,shape = actualShape)
-        if moves is None or not len(moves):
-            playable = False
+        moves = expectimax.expectimax(depth,tetris,actualShape)
+        if not len(moves):
             break
-        ctx = 0
+        chosenMove,_ = zip(*moves)
+        chosenMove = chosenMove[0]
         for move,_ in moves:
-            if move.score > argBig[1]:
-                argmax = (ctx,move.score)
-            ctx += 1
-        chosenMove,_ = moves[argBig[0]]
+            #print(move.grid)
+            #print(move.score)
+            #print("\n")
+            if move.score > chosenMove.score:
+                chosenMove = move
+
+        #print(f"Chosen move: {chosenMove} : {chosenMove.score}")
         tetris = chosenMove
-        tetris.grid[tetris.grid == 2] = 1
+        #tetris.grid[tetris.grid == 2] = 1
+        #print(f"Grid state:\n {tetris.grid}")
         SCORE += 1
+    #print(f"Expectimax AI final score: {SCORE}")
     return SCORE
 
 def baseAI(tetris):
@@ -79,12 +87,12 @@ if __name__ == "__main__":
     baseAIScores = []
     ExpectiAINodes = []
     baseAINodes = []
-    depth = 2 # 3 steps, including root
+    depth = 1 # 3 steps, including root
     print("\n\nEXPECTIMAX AI\n\n")
     for i in range(TOTAL):
         sysvariables.NODES = 0 #Reset node counter
         print(f"Simulation number expectimax AI: {i}")
-        tetris = grid.Grid(6,6)
+        tetris = grid.Grid(20,20)
         curr = expectiAI(tetris = tetris,depth = depth)
         expectiAIScores.append(curr)
         ExpectiAINodes.append(sysvariables.NODES)
@@ -100,7 +108,7 @@ if __name__ == "__main__":
     TOTAL = 100
     for i in range(TOTAL):
         print(f"Simulation number baseline AI: {i}")
-        tetris = grid.Grid(6,6)
+        tetris = grid.Grid(20,20)
         curr, nodes = baseAI(tetris)
         baseAINodes.append(nodes)
         baseAIScores.append(curr)
