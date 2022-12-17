@@ -78,7 +78,7 @@ def expectimax(depth,grid,shape):
             #print(currShape)
             if g.score > maxScore:
                 maxScore = g.score
-            sysvariables.DATASET.add((g.grid,currShape,g.score))
+            sysvariables.DATASET.append((g.grid,currShape,g.score))
             #print(len(sysvariables.DATASET))
         grid.score += maxScore
         
