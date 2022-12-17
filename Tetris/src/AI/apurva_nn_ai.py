@@ -42,7 +42,7 @@ def expectiAI(tetris,depth):
     return SCORE
 
 
-def nnAI(tetris):
+def nnAI(tetris,net):
     s = shape.Shape()
     SCORE = 0
     playable = True
@@ -72,7 +72,7 @@ def nnAI(tetris):
     print(f"Neural Networl AI final score: {SCORE}")
     return SCORE
 
-if __name__ == "__main__":
+def run():
 
     
     print("********* Neural Network 1 * 5 x 5 grid * All shapes have same probabilities * depth = 2 **********")
@@ -187,7 +187,7 @@ if __name__ == "__main__":
     print("Neural network ready!")
 
     tetris = grid.Grid(5,5)
-    nnAI(tetris)
+    nnAI(tetris,net)
 
 
 
