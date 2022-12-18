@@ -6,6 +6,7 @@ from modules import sysvariables
 from modules import grid
 import matplotlib.pyplot as plt
 import numpy as np
+import matplotlib.pyplot as pt
 
 import sys
 sys.path.append("..")
@@ -188,6 +189,16 @@ def generateNN():
             print("%d: %f, %f" % (epoch, training_error, testing_error))
         curves[0].append(training_error)
         curves[1].append(testing_error)
+    
+    pt.figure(figsize=(10,5))
+    # visualize learning curves on train/test data
+    pt.plot(curves[0], 'b-')
+    pt.plot(curves[1], 'r-')
+    #pt.plot([0, len(curves[1])], 'g-')
+    pt.plot()
+    pt.legend(["Train","Test"])
+
+    pt.show()
 
     print("Neural network ready!")
 

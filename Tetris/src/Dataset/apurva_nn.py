@@ -152,15 +152,5 @@ if __name__ == "__main__":
         curves[1].append(testing_error)
     
 
-import matplotlib.pyplot as pt
-pt.figure(figsize=(10,5))
-# visualize learning curves on train/test data
-pt.plot(curves[0], 'b-')
-pt.plot(curves[1], 'r-')
-#pt.plot([0, len(curves[1])], 'g-')
-pt.plot()
-pt.legend(["Train","Test"])
-
-pt.show()
 
 

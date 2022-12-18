@@ -16,6 +16,7 @@ from modules import grid
 import matplotlib.pyplot as plt
 import numpy as np
 import torch as tr
+import matplotlib.pyplot as pt
 
 DATASET = []
 
@@ -190,8 +191,18 @@ def generateNN():
         # print/save training progress
         if epoch % 1000 == 0:
            print("%d: %f, %f" % (epoch, training_error, testing_error))
-        #curves[0].append(training_error)
-        #curves[1].append(testing_error)
+        curves[0].append(training_error)
+        curves[1].append(testing_error)
+        
+    pt.figure(figsize=(10,5))
+    # visualize learning curves on train/test data
+    pt.plot(curves[0], 'b-')
+    pt.plot(curves[1], 'r-')
+    #pt.plot([0, len(curves[1])], 'g-')
+    pt.plot()
+    pt.legend(["Train","Test"])
+
+    pt.show()
 
     print("Neural network ready!")
 
@@ -208,6 +219,9 @@ def generateNN():
 if __name__ == "__main__":
 
     net = generateNN()
+
+
+
     
     #print("********* Experiment NN * 5 x 5 grid * All shapes have same probabilities * depth = 2 **********")
     

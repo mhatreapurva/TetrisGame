@@ -46,10 +46,6 @@ python3 -B experimennt_{student_name}_nn.py
 python3 experimennt_{student_name}_nn.py
 ```
 
-## Learning rate graph visualization:
-
-#### To visualize learning rate graphs for but the Neural Networks, go to AI/ directory and run  apurva_nn_ai.py and avantika_nn_ai.py. Again, if the learning rates don't drop use the -B flag as mentioned in the section above.
-
 #### Thank you
 
 
