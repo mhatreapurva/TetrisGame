@@ -20,7 +20,7 @@ pip3 install torch
 
 #### Running the interactive domain is just as it was specified (run play_tetris.py)
 #### 1. Choose the problem size
-#### 2. Select player type human, baseline ai, expectimax tree
+#### 2. Select player type human, baseline ai, expectimax tree or one of the neural networks.
 #### If you choose human, it will show you all the possible moves you have by displaying a list of coordinates where the shape can be placed, if you want to choose the first move enter 0 and so on until (n-1), please note there is no error handling for inputs so if there was a wrong choice pressed one needs to restart the process
 #### For baseline you only need to press enter, the code pauses every move and waits for your input, same goes for expectimax AI
 

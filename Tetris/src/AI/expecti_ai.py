@@ -23,16 +23,16 @@ def expectiAI(tetris):
         chosenMove,_ = zip(*moves)
         chosenMove = chosenMove[0]
         for move,_ in moves:
-            print(move.grid)
-            print(move.score)
-            print("\n")
+            #print(move.grid)
+            #print(move.score)
+            #print("\n")
             if move.score > chosenMove.score:
                 chosenMove = move
 
-        print(f"Chosen move: {chosenMove} : {chosenMove.score}")
+        print(f"Chosen move: {chosenMove.grid}")
         tetris = chosenMove
         #tetris.grid[tetris.grid == 2] = 1
-        print(f"Grid state:\n {tetris.grid}")
+        #print(f"Grid state:\n {tetris.grid}")
         SCORE += 1
     print(f"Expectimax AI final score: {SCORE}")
     return SCORE
