@@ -71,11 +71,11 @@ if __name__ == "__main__":
     Replace self.shapeProb in modules/shape.py with the below, this is what we used!
 
     self.shapeProb = {
-            self.O.tobytes() : 0.25,
-            self.I.tobytes() : 0.25,
-            self.T.tobytes() : 0.15,
-            self.J.tobytes() : 0.35,
-        }  
+        str(self.O) : 0.25,
+        str(self.I) : 0.25,
+        str(self.T) : 0.15,
+        str(self.J) : 0.35,
+    } 
     
     
     """
@@ -87,13 +87,13 @@ if __name__ == "__main__":
     baseAIScores = []
     ExpectiAINodes = []
     baseAINodes = []
-    depth = 1 # 3 steps, including root
+    depth = 3 # 3 steps, including root
     print("\n\nEXPECTIMAX AI\n\n")
     for i in range(TOTAL):
         sysvariables.NODES = 0 #Reset node counter
         print(f"Simulation number expectimax AI: {i}")
-        tetris = grid.Grid(20,20)
-        curr = expectiAI(tetris = tetris,depth = depth)
+        tetris = grid.Grid(6,6)
+        curr = expectiAI(tetris = tetris,depth = depth-1)
         expectiAIScores.append(curr)
         ExpectiAINodes.append(sysvariables.NODES)
         scoreKeeper += curr
@@ -108,7 +108,7 @@ if __name__ == "__main__":
     TOTAL = 100
     for i in range(TOTAL):
         print(f"Simulation number baseline AI: {i}")
-        tetris = grid.Grid(20,20)
+        tetris = grid.Grid(6,6)
         curr, nodes = baseAI(tetris)
         baseAINodes.append(nodes)
         baseAIScores.append(curr)

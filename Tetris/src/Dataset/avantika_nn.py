@@ -105,7 +105,7 @@ def batch_error(net, batch):
     e = tr.sum((y - u)**2) / utilities.shape[0]
     return e
 
-def run():
+if __name__ == "__main__":
 
     # whether to loop over individual training examples or batch them
     batched = True

@@ -235,13 +235,13 @@ if __name__ == "__main__":
     
 
     x = NNScores
-    plt.title("NN Scores Experiment")
+    plt.title("NN Scores Experiment - Apurva")
     plt.style.use('ggplot')
     plt.hist(x, bins=15)
     plt.show()
 
     x = NNNodes
-    plt.title("NN Nodes Experiment 1")
+    plt.title("NN Nodes Experiment 1 - Apurva")
     plt.style.use('ggplot')
     plt.hist(x, bins=15)
     plt.show()

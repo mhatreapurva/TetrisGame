@@ -7,6 +7,7 @@ from modules import grid
 import matplotlib.pyplot as plt
 import numpy as np
 
+
 DATASET = []
 
 def expectiAI(tetris,depth):
@@ -149,6 +150,7 @@ if __name__ == "__main__":
             print("%d: %f, %f" % (epoch, training_error, testing_error))
         curves[0].append(training_error)
         curves[1].append(testing_error)
+    
 
 import matplotlib.pyplot as pt
 pt.figure(figsize=(10,5))

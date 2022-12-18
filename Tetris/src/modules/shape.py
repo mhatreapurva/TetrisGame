@@ -27,18 +27,6 @@ class Shape:
         self.Z = np.array([[1,1,0],[0,1,1]])
         self.shapearr = np.array([self.O,self.I,self.T,self.J],dtype=object)
 
-        # self.shapeProb = {
-        #     str(self.O) : 0.3,
-        #     str(self.I) : 0.3,
-        #     str(self.T) : 0.2,
-        #     str(self.J) : 0.2,
-        # }   
-        # self.shapeProb = {
-        #     str(self.O) : 0.25,
-        #     str(self.I) : 0.25,
-        #     str(self.T) : 0.15,
-        #     str(self.J) : 0.35,
-        # }  
 
         self.shapeProb = {
         str(self.O) : 0.25,
