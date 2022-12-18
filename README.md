@@ -12,6 +12,8 @@ pip3 install matplotlib
 pip3 install numpy
 
 pip3 install pandas
+
+pip3 install torch
 ```
 
 ## 3. Running the interactive domain
@@ -24,11 +26,29 @@ pip3 install pandas
 
 #### Final score is then returned once there are no valid moves remaining.
 
-## 4. Running the experiments
+## 4. Running the Tree experiments
 
 #### Every experiment has its own file experiment{no}.py, run that file to run the experiment. The most important thing to note while running an experiment is, under every experiment.py file there is a if __name__ == main code block which has a comment.
 
 #### This comment includes a code snippet, that you need to replace within shape.py file, more instructions are written under each experiment file, these code snippets change the probabilities of shapes which was given in our proposal.
+
+## 5. Running the Neural Network experiments
+
+#### As required we included 4 experiments to run them, you need to run experiment_apurva_nn.py and experiment_avantika_nn.py. When we ran the expiremnts we saw that our batch error go down to 2 digits, if you see that the batch error is not at all decreasing use this command:
+
+```
+python3 -B experimennt_{student_name}_nn.py
+```
+
+#### The -B ensures that no cache is saved, if that doesnt work use the regular:
+
+```
+python3 experimennt_{student_name}_nn.py
+```
+
+## Learning rate graph visualization:
+
+#### To visualize learning rate graphs for but the Neural Networks, go to AI/ directory and run  apurva_nn_ai.py and avantika_nn_ai.py. Again, if the learning rates don't drop use the -B flag as mentioned in the section above.
 
 #### Thank you
 

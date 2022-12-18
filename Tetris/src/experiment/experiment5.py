@@ -70,12 +70,11 @@ if __name__ == "__main__":
     Replace self.shapeProb in modules/shape.py with the below, this is what we used!
 
         self.shapeProb = {
-        str(self.O) : 0.1,
-        str(self.I) : 0.1,
-        str(self.T) : 0.4,
-        str(self.J) : 0.4,
+        str(self.O) : 0.50,
+        str(self.I) : 0.50,
+        str(self.T) : 0.0,
+        str(self.J) : 0.0,
         } 
-
     
     """
     

@@ -26,15 +26,14 @@ class Shape:
         self.S = np.array([[0,1,1],[1,1,0]]) # --> Tested
         self.Z = np.array([[1,1,0],[0,1,1]])
         self.shapearr = np.array([self.O,self.I,self.T,self.J],dtype=object)
-
-
+        
         self.shapeProb = {
         str(self.O) : 0.25,
         str(self.I) : 0.25,
         str(self.T) : 0.25,
         str(self.J) : 0.25,
         } 
-
+        
     def validPositions(self, shape, GRID): #No of children's
         # Code inspiration and credits: Professor Garrett Katz.
         if GRID is None: return []
