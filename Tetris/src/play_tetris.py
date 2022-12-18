@@ -3,11 +3,9 @@ from modules import shape
 from modules import grid
 from modules import expectimax
 from modules import sysvariables
-import human
-import baseline_ai
-import expecti_ai
+from AI import human,baseline_ai,expecti_ai,apurva_nn_ai,avantika_nn_ai
 
-problem_size = [(5,5),(6,6),(7,7),(8,8),(9,9)]
+problem_size = [(4,4),(5,5),(6,6),(7,7),(8,8)]
 
 print("Choose a problem size")
 for i,pb in enumerate(problem_size):
@@ -17,7 +15,7 @@ choice = int(input())
 
 print(f"Selecting problem size: {problem_size[choice]}")
 
-print(f"Select 1. Human 2. Baseline AI 3. Expectimax(Tree)")
+print(f"Select 1. Human 2. Baseline AI 3. Expectimax(Tree) 4. Apurva NN 5. Avantika NN")
 
 ptype = int(input())
 
@@ -31,3 +29,10 @@ if ptype == 2:
     baseline_ai.baseAI(tetris)
 if ptype == 3:
     expecti_ai.expectiAI(tetris)
+if ptype == 4:
+    print("If choosing NN, the problem size is fixed to 5 x 5")
+    apurva_nn_ai.run()
+
+if ptype == 5:
+    print("If choosing NN, the problem size is fixed to 5 x 5")
+    avantika_nn_ai.run()
